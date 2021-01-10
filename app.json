@@ -1,15 +1,13 @@
 {
-  "id": "nl.hdg.mqtt",
-  "version": "2.2.5",
+  "id": "us.originally.ousa",
+  "version": "2.2.6",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "name": {
-    "en": "MQTT Hub",
-    "nl": "MQTT Hub"
+    "en": "OUSA"
   },
   "description": {
-    "en": "Turn your Homey into a HUB and let external applications discover & control all your connected devices.",
-    "nl": "Maak van je Homey een HUB. Geef externe applicaties de mogelijkheid om al je apparaten te vinden en er mee te communiceren."
+    "en":  "This is a bridge component between your Homey and OUSA system. For more information, please visit https://originally.us"
   },
   "category": [
     "tools",
@@ -27,11 +25,15 @@
     "small": "/assets/images/small.jpg"
   },
   "author": {
-    "name": "Harrie de Groot",
-    "email": "harriedegroot@gmail.com"
+    "name": "Originally US",
+    "email": "hello@originally.us"
   },
   "contributors": {
     "developers": [
+      {
+        "name": "Originally US",
+        "email": "hello@originally.us"
+      },
       {
         "name": "Harrie de Groot",
         "email": "harriedegroot@gmail.com"
