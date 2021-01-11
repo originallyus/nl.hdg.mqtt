@@ -239,7 +239,7 @@ class HomieDispatcher {
     }
 
     getNodeName(device) {
-        let path = [device.name];
+        let path = [device.id];
         if (this.topicIncludeZone) {
             path.unshift(device.zone && device.zone.name ? device.zone.name : DEFAULT_ZONE);
         }
