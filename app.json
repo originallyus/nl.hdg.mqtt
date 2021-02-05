@@ -1,6 +1,6 @@
 {
   "id": "us.originally.ousa",
-  "version": "2.2.6",
+  "version": "0.0.1",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "name": {
@@ -44,15 +44,8 @@
       }
     ]
   },
-  "contributing": {
-    "donate": {
-      "paypal": {
-        "username": "harriedegroot"
-      }
-    }
-  },
   "bugs": {
-    "url": "https://github.com/harriedegroot/nl.hdg.mqtt/issues"
+    "url": "https://github.com/originallyus/us.originally.ousa/issues"
   },
   "homeyCommunityTopicId": 6766,
   "drivers": [
