@@ -326,9 +326,11 @@ class HomieDispatcher {
                     const id = capability.id;
                     const color = (this.colorFormat !== 'values' && id === 'light_hue') ? 'color' : null;
                     const value = capability.value;
+                    
                     const capabilityTitle = color ? 'Color' : (capability.title && typeof capability.title === 'object') ? capability.title['en'] : capability.title;
                     const capabilityName = capabilityTitle || capability.desc || id;
-                    const name = _.replace([device.name, capabilityName].filter(x => x).join(' - '), "_", " ");
+                    
+                    const name = [device.name, capabilityName].filter(x => x).join(' - ');
                     const dataType = this._convertDataType(capability);
 
                     if (dataType) { // NOTE: undefined for filtered color formats
