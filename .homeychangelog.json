@@ -1,0 +1,5 @@
+{
+  "0.0.1": {
+    "en": "Published device-id should not be changed when user rename the device.\nNode name follows Homey's capability ID name exactly."
+  }
+}

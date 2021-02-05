@@ -1,0 +1,1 @@
+This is a bridge component between your Homey and OUSA system. For more information, please visit https://originally.us
