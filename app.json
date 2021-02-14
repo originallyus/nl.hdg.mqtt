@@ -14,7 +14,7 @@
     "internet"
   ],
   "tags": {
-    "en": [ "MQTT", "HUB", "gateway", "bridge", "discovery" ]
+    "en": [ "OUSA", "HUB", "gateway", "bridge", "discovery" ]
   },
   "permissions": [
     "homey:manager:api",
@@ -33,14 +33,6 @@
       {
         "name": "Originally US",
         "email": "hello@originally.us"
-      },
-      {
-        "name": "Harrie de Groot",
-        "email": "harriedegroot@gmail.com"
-      },
-      {
-        "name": "Menno van Grinsven",
-        "email": "mgrinsven@gmail.com"
       }
     ]
   },
@@ -52,8 +44,7 @@
     {
       "id": "device",
       "name": {
-        "en": "MQTT Device",
-        "nl": "MQTT Apparaat"
+        "en": "OUSA Device"
       },
       "class": "other",
       "capabilities": [
@@ -187,8 +178,7 @@
     {
       "id": "homie",
       "name": {
-        "en": "Homie Discovery",
-        "nl": "Homie Discovery"
+        "en": "OUSA Discovery"
       },
       "class": "other",
       "capabilities": [
@@ -214,41 +204,34 @@
       {
         "id": "device_changed",
         "title": {
-          "en": "An MQTT device changed",
-          "nl": "Een MQTT apparaat is veranderd"
+          "en": "An OUSA device changed"
         },
         "tokens": [
           {
             "name": "value",
             "title": {
-              "en": "value",
-              "nl": "waarde"
+              "en": "value"
             },
             "example": {
-              "en": "true",
-              "nl": "true"
+              "en": "true"
             }
           },
           {
             "name": "Capability",
             "title": {
-              "en": "capability",
-              "nl": "functionaliteit"
+              "en": "capability"
             },
             "example": {
-              "en": "onoff",
-              "nl": "aanuit"
+              "en": "onoff"
             }
           },
           {
             "name": "device",
             "title": {
-              "en": "device",
-              "nl": "apparaat"
+              "en": "device"
             },
             "example": {
-              "en": "MQTT Lamp",
-              "nl": "MQTT Lamp"
+              "en": "Ceiling Light"
             }
           }
         ]
@@ -256,8 +239,7 @@
       {
         "id": "change",
         "title": {
-          "en": "Value changed",
-          "nl": "Waarde is veranderd"
+          "en": "Value changed"
         },
         "args": [
           {
@@ -272,24 +254,21 @@
       {
         "id": "set_value",
         "title": {
-          "en": "Set a capability value",
-          "nl": "Zet de waarde van een functionaliteit"
+          "en": "Set a capability value"
         },
         "args": [
           {
             "name": "capability",
             "type": "text",
             "placeholder": {
-              "en": "Capability",
-              "nl": "Functionaliteit"
+              "en": "Capability"
             }
           },
           {
             "name": "value",
             "type": "text",
             "placeholder": {
-              "en": "Value",
-              "nl": "Waarde"
+              "en": "Value"
             }
           },
           {
