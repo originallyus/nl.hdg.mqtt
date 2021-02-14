@@ -1,1 +1,1 @@
-This is a bridge component between your Homey and OUSA system. For more information, please visit https://originally.us
+This app is a bridge component between your Homey and OUSA system. It allows OUSA platform to receive realtime information from your devices under Homey and update your OUSA mobile app as well as controlling your Homey devices directly from OUSA mobile app with ease.
