@@ -246,10 +246,3 @@ The `v1.5` [branch](https://github.com/harriedegroot/nl.hdg.mqtt/tree/version1.5
 ## Final note ##
 The repository is available at: https://github.com/harriedegroot/nl.hdg.mqtt  
 If you want to contribute, just create a [pull-request](https://help.github.com/articles/about-pull-requests/) and I will take a look at it!
-
-Do you like this app? Consider a donation to support development.
- 
-[![Donate][pp-donate-image]][pp-donate-link]
-
-[pp-donate-link]: https://www.paypal.me/harriedegroot
-[pp-donate-image]: https://img.shields.io/badge/Donate-PayPal-green.svg
