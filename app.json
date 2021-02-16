@@ -1,13 +1,13 @@
 {
   "id": "us.originally.ousa",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "name": {
     "en": "OUSA"
   },
   "description": {
-    "en":  "Link your Homey to OUSA platform via this app to enjoy a seamless unified smart home experience accross all your devices."
+    "en":  "Enjoy a seamless unified smart home experience across all your devices"
   },
   "category": [
     "tools",
