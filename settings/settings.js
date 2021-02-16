@@ -17,13 +17,13 @@ const STATUS_OFFLINE = 'offline';
 const defaultSettings = {
     "systemName": 'Homey',
     "deviceId": '',
-    "protocol": "homie3",
+    "protocol": "custom",
     "homieTopic": "homie/{deviceId}",
 
     "customTopic": "homie/{deviceId}",
     "topicIncludeClass": false,
     "topicIncludeZone": false,
-    "normalize": true,
+    "normalize": false,
     "percentageScale": "int",
     "colorFormat": "hsv",
     "broadcastDevices": true,
@@ -34,10 +34,10 @@ const defaultSettings = {
     "hassOnlineMessage": "online",
     "hassOfflineMessage": "offline",
 
-    "broadcastSystemState": false,
+    "broadcastSystemState": true,
     "systemStateTopic": "{deviceId}/system/info",
 
-    "commands": false,
+    "commands": true,
     "commandTopic": "{deviceId}/$command",
 
     "birthWill": true,
