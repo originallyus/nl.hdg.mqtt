@@ -303,23 +303,6 @@ function getLanguage() {
     if (el) {
         el.style.display = "inline";
     }
-
-    //NOTE: Enable if dutch instructions are available
-    //try {
-    //    Homey.getLanguage(function (err, language) {
-    //        language = language === 'nl' ? 'nl' : 'en';
-    //        const el = document.getElementById("instructions" + language) || document.getElementById("instructionsen");
-    //        if (el) {
-    //            el.style.display = "inline";
-    //        }
-    //    });
-    //} catch (e) {
-    //    Homey.alert('Failed to get language: ' + e);
-    //    const el = document.getElementById("instructions" + language) || document.getElementById("instructionsen");
-    //    if (el) {
-    //        el.style.display = "inline";
-    //    }
-    //}
 }
 
 function selectProtocol(protocol) {
