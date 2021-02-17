@@ -4,9 +4,11 @@
   },
   "0.0.2": {
     "en": "Updated app information"
-  }
-  ,
+  },
   "0.0.3": {
     "en": "Updated app information"
+  },
+  "0.0.4": {
+    "en": "Update default configurations. Remove some tabs in configurations."
   }
 }
