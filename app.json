@@ -33,13 +33,20 @@
       {
         "name": "Originally US",
         "email": "hello@originally.us"
+      },
+      {
+        "name": "Harrie de Groot",
+        "email": "harriedegroot@gmail.com"
+      },
+      {
+        "name": "Menno van Grinsven",
+        "email": "mgrinsven@gmail.com"
       }
     ]
   },
   "bugs": {
     "url": "https://github.com/originallyus/us.originally.ousa/issues"
   },
-  "homeyCommunityTopicId": 6766,
   "drivers": [
     {
       "id": "device",
