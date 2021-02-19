@@ -12,6 +12,7 @@
   "dependencies": {
     "athom-api": "2.1.178",
     "homey-lib": "2.3.30",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "mqtt": "^4.2.6"
   }
 }

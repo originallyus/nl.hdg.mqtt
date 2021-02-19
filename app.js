@@ -12,6 +12,7 @@ const MessageQueue = require('./mqtt/MessageQueue');
 const Message = require('./mqtt/Message');
 const TopicsRegistry = require('./mqtt/TopicsRegistry');
 const normalize = require('./normalize');
+const mqtt = require('mqtt');
 
 // Services
 const Log = require("./Log.js");
