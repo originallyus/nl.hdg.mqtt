@@ -12,6 +12,6 @@
     "en": "Update default configurations. Remove Devices tabs in configurations."
   },
   "0.0.5": {
-    "en": "Remove Settings tabs in configurations. Update metadata."
+    "en": "Adding MQTT Client library. Remove Settings tabs in configurations. Update metadata."
   }
 }
