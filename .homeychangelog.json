@@ -9,6 +9,9 @@
     "en": "Updated app information"
   },
   "0.0.4": {
-    "en": "Update default configurations. Remove some tabs in configurations."
+    "en": "Update default configurations. Remove Devices tabs in configurations."
+  },
+  "0.0.5": {
+    "en": "Remove Settings tabs in configurations. Update metadata."
   }
 }
