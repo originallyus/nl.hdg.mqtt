@@ -138,14 +138,22 @@ class MQTTDriver extends Homey.Driver {
         });
 
         socket.on('install', function (data, callback) {
-            Homey.addDevice(pairingDevice, (err, res) => {
-                if (err) {
-                    callback(err);
-                    return;
-                }
-                callback(null, pairingDevice);
-                Homey.done();
-            });
+            client.isInstalled()
+                .then(installed => {
+                    if (!installed) {
+                        calback("MQTT Client app not installed");
+                        return;
+                    }
+                    Homey.addDevice(pairingDevice, (err, res) => {
+                        if (err) {
+                            callback(err);
+                            return;
+                        }
+                        callback(null, pairingDevice);
+                        Homey.done();
+                    });
+                })
+                .catch(error => callback(error));
         });
 
         socket.on('disconnect', function () {

@@ -6,11 +6,16 @@ const Log = require("../Log.js");
 const EventHandler = require('../EventHandler');
 const Message = require('./Message');
 
+const CLIENT = new Homey.ApiApp('nl.scanno.mqtt').register();
 const CLIENT_STARTUP_DELAY = 10000; // Wait 10 sec. before sending messages to the MQTT Client on app install
 
 class MQTTClient  {
 
     isRegistered() { return this.registered; }
+
+    async isInstalled() {
+        return await this.clientApp.getInstalled(); 
+    }
 
     constructor(autoConnect) {
         this.clientApp = CLIENT;
@@ -55,6 +60,10 @@ class MQTTClient  {
                 this._onReady()
             })
 
+            this.client.on('message',(topic, message, packet) => {
+                this._handleMessage(topic, message)
+            });
+
             // // Register to app events
             // this._installedCallback = this._onClientAppInstalled.bind(this);
             // this._uninstalledCallback = this._onClientAppUninstalled.bind(this);
@@ -71,8 +80,9 @@ class MQTTClient  {
             // var installed = await this.clientApp.getInstalled();
             
             // // call installed handlers
-            this._onClientAppInstalled(0);
-
+            // if (installed) {
+            //     this._onClientAppInstalled(0);
+            // }
         } catch (e) {
             Log.error('Failed to connect MQTTClient');
             Log.error(e);
@@ -185,8 +195,9 @@ class MQTTClient  {
                 if (msg.mqttMessage === undefined) {
                     msg.mqttMessage = null;
                 }
+
                 msg.mqttMessage = msg.mqttMessage ? msg.mqttMessage.toString() : 'null'
-                return this.client.publish(msg.mqttTopic, msg.mqttMessage.toString(), { qos: msg.qos, retain: msg.retain })
+                return this.client.publish(msg.mqttTopic, msg.mqttMessage, { qos: msg.qos, retain: msg.retain })
                 //return await this.clientApp.post('send', msg);
             }
         } catch (error) {
@@ -276,9 +287,6 @@ class MQTTClient  {
 
     _handleMessage(topic, message) {
         if (!this.registered) return;
-
-        console.log("_handleMessage: " + topic);
-        console.log(message);
 
         this.onMessage.emit(topic, message)
             .catch(error => Log.error(error));
