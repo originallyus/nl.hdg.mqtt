@@ -1,6 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
+const Mqtt = require('mqtt');
 const Log = require("../Log.js");
 const EventHandler = require('../EventHandler');
 const Message = require('./Message');
@@ -22,12 +23,14 @@ class MQTTClient  {
         this.onRegistered = new EventHandler('MQTTClient.registered');
         this.onUnRegistered = new EventHandler('MQTTClient.unregistered');
         this.onMessage = new EventHandler('MQTTClient.message');
-
-        if (autoConnect) {
+        if (autoConnect)
             this.connect()
-                .then(() => Log.info("MQTTClient connected"))
-                .catch(error => Log.error(error));
-        }
+
+        // if (autoConnect) {
+        //     this.connect()
+        //         .then(() => Log.info("MQTTClient connected"))
+        //         .catch(error => Log.error(error));
+        // }
     }
 
     async connect() {
@@ -35,25 +38,47 @@ class MQTTClient  {
             if (this._connected) return;
             this._connected = true;
 
-            // Register to app events
-            this._installedCallback = this._onClientAppInstalled.bind(this);
-            this._uninstalledCallback = this._onClientAppUninstalled.bind(this);
-            this._handleMessageCallback = this._handleMessage.bind(this);
+            const clientID = 'homey-574566d72b5ebe541b913956'
+            const lwt_struct = {};
+            lwt_struct.topic = clientID+"/status";
+            lwt_struct.payload = "Offline";
+            lwt_struct.qos = 0;
+            lwt_struct.retain = true;
 
-            // Register future events
-            this.clientApp
-                //.register() // NOTE: Registering multiple time results unsubscription of previous listeners
-                .on('install', this._installedCallback)
-                .on('uninstall', this._uninstalledCallback)
-                .on('realtime', this._handleMessageCallback);
+            var connect_options = {};
+            connect_options.keepalive = 10;
+            connect_options.username = 'iZBDEquFWVlnmC0h7JKRqL9ZZZofLygm3hUWSJnx';
+            connect_options.password = 'XHu7CNzuOZFdZ9CGfuhsMqQ3nqSpar2yV1DKEydO';
+            connect_options.rejectUnauthorized = false;
+            connect_options.clientId = clientID;
+            connect_options.will = lwt_struct;
 
-            // Fetch installed app
-            var installed = await this.clientApp.getInstalled();
+            this.client = Mqtt.connect('mqtt://ousa.originally.us:1884', connect_options)
+            // On connection ...
+            this.client.on('connect', () => {
+                Log.info("MQTTClient connected")
+                this._onReady()
+            })
+
+            // // Register to app events
+            // this._installedCallback = this._onClientAppInstalled.bind(this);
+            // this._uninstalledCallback = this._onClientAppUninstalled.bind(this);
+            // this._handleMessageCallback = this._handleMessage.bind(this);
+
+            // // Register future events
+            // this.clientApp
+            //     //.register() // NOTE: Registering multiple time results unsubscription of previous listeners
+            //     .on('install', this._installedCallback)
+            //     .on('uninstall', this._uninstalledCallback)
+            //     .on('realtime', this._handleMessageCallback);
+
+            // // Fetch installed app
+            // var installed = await this.clientApp.getInstalled();
             
-            // call installed handlers
-            if (installed) {
-                this._onClientAppInstalled(0);
-            }
+            // // call installed handlers
+            // if (installed) {
+            //     this._onClientAppInstalled(0);
+            // }
         } catch (e) {
             Log.error('Failed to connect MQTTClient');
             Log.error(e);
@@ -65,12 +90,14 @@ class MQTTClient  {
         this._connected = false;
 
         try {
-            this.clientApp.removeListener('realtime', this._handleMessageCallback);
-            this.clientApp.removeListener('install', this._installedCallback);
-            this.clientApp.removeListener('uninstall', this._uninstalledCallback);
+            this.client.end()
 
-            await this.clientApp.unregister();
-            this._onClientAppUninstalled();
+            // this.clientApp.removeListener('realtime', this._handleMessageCallback);
+            // this.clientApp.removeListener('install', this._installedCallback);
+            // this.clientApp.removeListener('uninstall', this._uninstalledCallback);
+
+            // await this.clientApp.unregister();
+            // this._onClientAppUninstalled();
         } catch (e) {
             Log.error('Failed to disconnect MQTTClient');
             Log.error(e);
@@ -91,13 +118,21 @@ class MQTTClient  {
                 this.topics.add(topic);
 
                 Log.info('subscribing to topic: ' + topic);
-                return await this.clientApp.post('subscribe', { topic: topic }, error => {
+                return this.client.subscribe(topic, {}, (error) => {
                     if (error) {
                         Log.error(error);
                     } else {
                         Log.info('sucessfully subscribed to topic: ' + topic);
                     }
-                });
+                })
+                
+                // return await this.clientApp.post('subscribe', { topic: topic }, error => {
+                //     if (error) {
+                //         Log.error(error);
+                //     } else {
+                //         Log.info('sucessfully subscribed to topic: ' + topic);
+                //     }
+                // });
             } else {
                 Log.info("skipped topic subscription: No topic provided");
             }
@@ -156,7 +191,9 @@ class MQTTClient  {
                 if (msg.mqttMessage === undefined) {
                     msg.mqttMessage = null;
                 }
-                return await this.clientApp.post('send', msg);
+                msg.mqttMessage = msg.mqttMessage ? msg.mqttMessage.toString() : 'null'
+                return this.client.publish(msg.mqttTopic, msg.mqttMessage.toString(), { qos: msg.qos, retain: msg.retain })
+                //return await this.clientApp.post('send', msg);
             }
         } catch (error) {
             Log.info('Error publishing message');
