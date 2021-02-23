@@ -48,7 +48,44 @@
     }
   },
   "settings": {
-    "benefit": "Turn your Homey into a HUB"
+    "app": {
+      "title": "MQTT client settings",
+      "server": {
+        "server_title": "MQTT broker setings",
+        "public_broker": "Use HiveMQ public broker",
+        "server_details": "Enter broker details",
+        "server_explanation": "You need to specify a broker where the MQTT client can connect to. The servername can either be a local ip adres when using a private broker, or a FQDN. You also need to provide the portnumber. Normally this would be port 1883 and 8883 for secure connections",
+        "url": "Enter IP adress or DNS",
+        "port": "Enter port number",
+        "tls": "Use a secure connection to the broker (TLS)",
+        "selfsigned": "Disable certificate checking (by use of selfsigned certificates",
+        "username": "Username for the broker",
+        "password": "Password for the broker",
+        "custom_clientid": "Enable to provide a custom Client ID that is used when connecting to the broker.",
+        "clientid": "Client ID"
+      },
+
+      "button": {
+        "save": "Save",
+        "save_setting": "Save Setting",
+        "test": "Test",
+        "getlogs": "Get logs"
+      },
+
+      "log": {
+        "title": "Log lines:"
+      },
+
+      "messages": {
+        "testing": "Testing, please wait...",
+        "unable_set_settings": "There was an error trying to apply the settings.",
+        "error_connect_broker": "Unable to connect to the broker, please check the broker settings.",
+        "settings_success_tested": "Settings succesfully tested. Please use the save button to save your settings",
+        "settings_saved": "Settings saved",
+        "settings_noSettingsChanged": "No setting has been changed",
+        "settings_unexpectedError": "Unexpected error occured. Please try again"
+      }
+    }
   },
   "devices": {
     "flowcard": "Flowcard"
