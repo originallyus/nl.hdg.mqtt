@@ -235,7 +235,7 @@ class MQTTClient {
           msg.mqttMessage = null;
         }
 
-        var publish_options;
+        var publish_options = {};
         if (msg.qos == undefined || msg.retain == undefined) {
           publish_options = {
             qos: 0,
