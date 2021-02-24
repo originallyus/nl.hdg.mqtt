@@ -235,11 +235,25 @@ class MQTTClient {
           msg.mqttMessage = null;
         }
 
+        var publish_options;
+        if (msg.qos == undefined || msg.retain == undefined) {
+          publish_options = {
+            qos: 0,
+            retain: false,
+          };
+        } else {
+          publish_options = {
+            qos: parseInt(msg.qos),
+            retain: msg.retain == "1",
+          };
+        }
+
         msg.mqttMessage = msg.mqttMessage ? msg.mqttMessage.toString() : "null";
-        return this.client.publish(msg.mqttTopic, msg.mqttMessage, {
-          qos: msg.qos,
-          retain: msg.retain,
-        });
+        return this.client.publish(
+          msg.mqttTopic,
+          msg.mqttMessage,
+          publish_options
+        );
         //return await this.clientApp.post('send', msg);
       }
     } catch (error) {
