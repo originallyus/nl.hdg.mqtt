@@ -13,5 +13,8 @@
   },
   "0.0.5": {
     "en": "Adding MQTT Client library. Remove Settings tabs in configurations. Update metadata."
+  },
+  "0.0.6": {
+    "en": "Integrated MQTT Client. No longer requires external MQTT Client app."
   }
 }
