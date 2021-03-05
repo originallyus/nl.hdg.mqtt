@@ -1,145 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <!-- <link rel="stylesheet" type="text/css" href="../assets/styles.css" /> -->
-    <!-- <link rel="stylesheet" type="text/css" href="settings.css" /> -->
-    <script
-      type="text/javascript"
-      src="/homey.js"
-      data-origin="settings"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/manager/webserver/assets/js/jquery.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="../assets/vue.min.js"
-      data-origin="settings"
-    ></script>
-    <script
-      type="text/javascript"
-      src="settings.js"
-      data-origin="settings"
-    ></script>
-  </head>
-  <body>
-    <h1 data-i18n="settings.app.title"></h1>
-    <form id="owntracks">
-      <fieldset id="serversettings">
-        <legend>
-          <label data-i18n="settings.app.server.server_details"></label>
-        </legend>
+<head>
+    <link rel="stylesheet" type="text/css" href="../assets/styles.css" />
+    <link rel="stylesheet" type="text/css" href="settings.css" />
 
-        <p data-i18n="settings.app.server.server_explanation"></p>
-
-        <div class="field row">
-          <label
-            class="form_label"
-            for="Url"
-            data-i18n="settings.app.server.url"
-          ></label>
-          <br />
-          <input class="form_input" id="url" type="text" value="" /> <br />
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+    <script type="text/javascript" src="/manager/webserver/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="../assets/vue.min.js" data-origin="settings"></script>
+    <script type="text/javascript" src="settings.js" data-origin="settings"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="tab1" class="panel" style="display: none;">
+            <div class="setting">
+                <label class="loglevel" data-i18n="tab1.loglevel">Log level</label>
+                <div class="settings-itemgroup">
+                    <select id="loglevel" @change="setLogLevel($event.target.value)">
+                        <option value="off">Turned off</option>
+                        <option value="error">Errors and Warnings</option>
+                        <option value="info" selected="selected">Information</option>
+                        <option value="debug">Debug</option>
+                    </select>
+                </div>
+            </div>
+            <div v-html="log"></div>
         </div>
-
-        <div class="field row">
-          <label
-            class="form_label"
-            for="ip_port"
-            data-i18n="settings.app.server.port"
-          ></label>
-          <br />
-          <input class="form_input" id="ip_port" type="text" value="1883" />
-          <br />
-        </div>
-
-        <div class="field">
-          <input class="checkbox" id="tls" type="checkbox" />
-          <label
-            class="form_label"
-            for="tls"
-            data-i18n="settings.app.server.tls"
-          ></label>
-        </div>
-
-        <div class="field">
-          <input class="checkbox" id="selfsigned" type="checkbox" />
-          <label
-            class="form_label"
-            for="selfsigned"
-            data-i18n="settings.app.server.selfsigned"
-          ></label>
-        </div>
-
-        <div class="field row">
-          <label
-            class="form_label"
-            for="User"
-            data-i18n="settings.app.server.username"
-          ></label>
-          <br />
-          <input class="form_input" id="user" type="text" value="" /> <br />
-        </div>
-
-        <div class="field row">
-          <label
-            class="form_label"
-            for="Password"
-            data-i18n="settings.app.server.password"
-          ></label>
-          <br />
-          <input class="form_input" id="password" type="password" value="" />
-          <br />
-        </div>
-
-        <div class="field">
-          <input
-            class="checkbox"
-            id="custom_clientid"
-            type="checkbox"
-            checked="false"
-            onchange="owntracks.clientid.disabled = !checked"
-          />
-          <label
-            class="form_label"
-            for="custom_clientid"
-            data-i18n="settings.app.server.custom_clientid"
-          ></label>
-        </div>
-
-        <div class="field row">
-          <label
-            class="form_label"
-            for="clientid"
-            data-i18n="settings.app.server.clientid"
-          ></label>
-          <br />
-          <input class="form_input" id="clientid" type="text" value="" />
-          <br />
-        </div>
-      </fieldset>
-    </form>
-
-    <button id="button_save" data-i18n="settings.app.button.save_setting">
-      Save Setting
-    </button>
-
-    <!-- <div id="app">
-      <div id="tab1" class="panel" style="display: none">
-        <div class="setting">
-          <label class="loglevel" data-i18n="tab1.loglevel">Log level</label>
-          <div class="settings-itemgroup">
-            <select id="loglevel" @change="setLogLevel($event.target.value)">
-              <option value="off">Turned off</option>
-              <option value="error">Errors and Warnings</option>
-              <option value="info" selected="selected">Information</option>
-              <option value="debug">Debug</option>
-            </select>
-          </div>
-        </div>
-        <div v-html="log"></div>
-      </div>
-    </div> -->
-  </body>
+    </div>
+</body>
 </html>
