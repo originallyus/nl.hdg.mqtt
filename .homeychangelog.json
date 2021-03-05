@@ -16,5 +16,8 @@
   },
   "0.0.6": {
     "en": "Integrated MQTT Client. No longer requires external MQTT Client app."
+  },
+  "0.0.7": {
+    "en": "Remove user settings page."
   }
 }
