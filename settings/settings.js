@@ -115,7 +115,9 @@ const ALL_DEVICES = {
 var currentValues = {};
 function onHomeyReady(homeyReady) {
   Homey = homeyReady;
+  Homey.ready();
   hubSettings = { ...defaultSettings };
+
   Homey.api("GET", "/running", null, (err, result) => {
     $("#running").prop("disabled", false);
     running = !err && result;
@@ -550,94 +552,4 @@ function setLogLevel(level) {
   } catch (e) {
     displayLog(e);
   }
-}
-
-function saveSettings() {
-  var oldValues = JSON.parse(JSON.stringify(currentValues));
-  console.log(oldValues);
-  var valuesHaveBeenChanged = false;
-
-  if (currentValues.url != document.getElementById("url").value) {
-    console.log("url has been changed");
-    HomeyAPI.set("url", document.getElementById("url").value);
-    valuesHaveBeenChanged = true;
-    currentValues.url = document.getElementById("url").value;
-  }
-
-  if (currentValues.ip_port != document.getElementById("ip_port").value) {
-    console.log("ip_port has been changed");
-    HomeyAPI.set("ip_port", document.getElementById("ip_port").value);
-    valuesHaveBeenChanged = true;
-    currentValues.ip_port = document.getElementById("ip_port").value;
-  }
-
-  if (currentValues.tls != document.getElementById("tls").checked) {
-    console.log("tls has been changed");
-    HomeyAPI.set("tls", document.getElementById("tls").checked);
-    valuesHaveBeenChanged = true;
-    currentValues.tls = document.getElementById("tls").checked;
-  }
-
-  if (
-    currentValues.selfsigned != document.getElementById("selfsigned").checked
-  ) {
-    console.log("selfsigned has been changed");
-    HomeyAPI.set("selfsigned", document.getElementById("selfsigned").checked);
-    valuesHaveBeenChanged = true;
-    currentValues.selfsigned = document.getElementById("selfsigned").checked;
-  }
-
-  if (currentValues.user != document.getElementById("user").value) {
-    console.log("user has been changed");
-    HomeyAPI.set("user", document.getElementById("user").value);
-    valuesHaveBeenChanged = true;
-    currentValues.user = document.getElementById("user").value;
-  }
-
-  if (currentValues.password != document.getElementById("password").value) {
-    console.log("password has been changed");
-    HomeyAPI.set("password", document.getElementById("password").value);
-    valuesHaveBeenChanged = true;
-    currentValues.password = document.getElementById("password").value;
-  }
-
-  if (
-    currentValues.custom_clientid !=
-    document.getElementById("custom_clientid").checked
-  ) {
-    console.log("custom_clientid has been changed");
-    HomeyAPI.set(
-      "custom_clientid",
-      document.getElementById("custom_clientid").checked
-    );
-    valuesHaveBeenChanged = true;
-    currentValues.custom_clientid = document.getElementById(
-      "custom_clientid"
-    ).checked;
-  }
-
-  if (currentValues.clientid != document.getElementById("clientid").value) {
-    console.log("clientid has been changed");
-    HomeyAPI.set("clientid", document.getElementById("clientid").value);
-    valuesHaveBeenChanged = true;
-    currentValues.clientid = document.getElementById("clientid").value;
-  }
-
-  if (valuesHaveBeenChanged == true) {
-    notifySettings(oldValues);
-    HomeyAPI.alert(__("settings.app.messages.settings_saved"));
-  } else {
-    HomeyAPI.alert(__("settings.app.messages.settings_noSettingsChanged"));
-  }
-}
-
-function notifySettings(values) {
-  HomeyAPI.api("POST", "test/settingschange/", values, function (err, result) {
-    if (!err) {
-      console.log("Settings change succesfull");
-    } else {
-      // Oeps, something went wrong here
-      Homey.alert(__("settings.app.messages.unable_set_settings"));
-    }
-  });
 }

@@ -89,13 +89,6 @@ class MQTTHub extends Homey.App {
     }
   }
 
-  changedSettings(args) {
-    Log.debug("changedSettings called");
-    Log.debug(args.body);
-    this.mqttClient.disconnect();
-    this.mqttClient.connect();
-  }
-
   initSettings() {
     const systemName = this.system.name || "Homey";
     if (
