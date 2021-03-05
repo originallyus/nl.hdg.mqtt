@@ -15,17 +15,18 @@ class MQTTClient {
   }
 
   async isInstalled() {
-    return await this.clientApp.getInstalled();
+    return true;
+    // return await this.clientApp.getInstalled();
   }
 
   constructor(autoConnect) {
-    this.clientApp = CLIENT;
-
+    this.settings = Homey.ManagerSettings.get("settings");
     this.onRegistered = new EventHandler("MQTTClient.registered");
     this.onUnRegistered = new EventHandler("MQTTClient.unregistered");
     this.onMessage = new EventHandler("MQTTClient.message");
     if (autoConnect) this.connect();
 
+    // this.clientApp = CLIENT;
     // if (autoConnect) {
     //     this.connect()
     //         .then(() => Log.info("MQTTClient connected"))
@@ -47,13 +48,10 @@ class MQTTClient {
   }
 
   getConnectOptions() {
-    var clientID = "homey_" + Math.random().toString(16).substr(2, 8);
+    const clientID = this.settings.deviceId;
     var rejectUnauth = true;
     if (Homey.ManagerSettings.get("selfsigned") == true) {
       rejectUnauth = false;
-    }
-    if (Homey.ManagerSettings.get("custom_clientid") == true) {
-      clientID = Homey.ManagerSettings.get("clientid");
     }
     Log.info("info: clientID = " + clientID);
 
@@ -77,23 +75,8 @@ class MQTTClient {
     try {
       if (this._connected) return;
       this._connected = true;
-
-      const clientID = "homey-574566d72b5ebe541b913956";
-      const lwt_struct = {};
-      lwt_struct.topic = clientID + "/status";
-      lwt_struct.payload = "Offline";
-      lwt_struct.qos = 0;
-      lwt_struct.retain = true;
-
-      var connect_options = {};
-      connect_options.keepalive = 10;
-      connect_options.username = "iZBDEquFWVlnmC0h7JKRqL9ZZZofLygm3hUWSJnx";
-      connect_options.password = "XHu7CNzuOZFdZ9CGfuhsMqQ3nqSpar2yV1DKEydO";
-      connect_options.rejectUnauthorized = false;
-      connect_options.clientId = clientID;
-      connect_options.will = lwt_struct;
-
       this.client = Mqtt.connect(this.getBrokerURL(), this.getConnectOptions());
+
       // On connection ...
       this.client.on("connect", () => {
         Log.info("MQTTClient connected");
